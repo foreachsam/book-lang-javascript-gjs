@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>file load conetnts | Gjs</title>
+        <title>Gtk | Gjs</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -19,10 +19,10 @@
         
     
     
-    <link rel="next" href="../../content/gtk/index.html" />
+    <link rel="next" href="../../content/gtk/start/index.html" />
     
     
-    <link rel="prev" href="../../content/gio/index.html" />
+    <link rel="prev" href="../../content/gio/file-load-contents.html" />
     
 
         
@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="3.1" data-basepath="../.." data-revision="1435147461571">
+    <div class="book" data-level="4" data-basepath="../.." data-revision="1435147461571">
     
 
 <div class="book-summary">
@@ -223,7 +223,7 @@
                 
     
         
-        <li class="chapter active" data-level="3.1" data-path="content/gio/file-load-contents.html">
+        <li class="chapter " data-level="3.1" data-path="content/gio/file-load-contents.html">
             
                 
                     <a href="../../content/gio/file-load-contents.html">
@@ -244,7 +244,7 @@
         </li>
     
         
-        <li class="chapter " data-level="4" data-path="content/gtk/index.html">
+        <li class="chapter active" data-level="4" data-path="content/gtk/index.html">
             
                 
                     <a href="../../content/gtk/index.html">
@@ -504,85 +504,9 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_5">
+                    <section class="normal" id="section-gitbook_7">
                     
-                        <h1 id="file-load-contents">file load contents</h1>
-<h2 id="">主要範例</h2>
-<p><a href="../../example/gio/file-load-contents/main.js">程式碼</a></p>
-<pre><code class="lang-javascript">#!<span class="hljs-regexp">/usr/</span>bin/gjs
-
-<span class="hljs-keyword">const</span> Gio = imports.gi.Gio;
-
-<span class="hljs-keyword">var</span> file = Gio.File.new_for_path(<span class="hljs-string">"data.txt"</span>);
-
-<span class="hljs-keyword">try</span> {
-
-    <span class="hljs-keyword">var</span> [ok, data, etag] = file.load_contents(<span class="hljs-literal">null</span>);
-
-    <span class="hljs-keyword">if</span> (ok) {
-
-        print(data);
-
-        <span class="hljs-comment">//print(data.toString());</span>
-        <span class="hljs-comment">//print(data.toString('utf-8'));</span>
-
-    }
-
-} <span class="hljs-keyword">catch</span> (e) {
-    print(<span class="hljs-string">"Error: "</span>, e.message);
-}
-</code></pre>
-<p>注意:</p>
-<ul>
-<li>「load_contents」回傳的第二個參數「data」是「ByteArray」。</li>
-<li>「data.txt」內容的編碼若是「utf-8」，直接使用「print(data)」。
-等同於「print(data.toString())」或是「data.toString(&#39;utf-8&#39;)」。</li>
-<li>「data.txt」內容的編碼若是「big5」，則要改用「print(data.toString(&#39;big5&#39;));」。</li>
-</ul>
-<h2 id="api">Api</h2>
-<ul>
-<li><a href="https://people.gnome.org/~gcampagna/docs/Gio-2.0/index.html" target="_blank">Gio-2.0</a> / <a href="https://people.gnome.org/~gcampagna/docs/Gio-2.0/Gio.File.html" target="_blank">Gio.File</a> / <a href="https://people.gnome.org/~gcampagna/docs/Gio-2.0/Gio.File.load_contents.html" target="_blank">Gio.File.load_contents</a></li>
-<li>GNOME / gjs / doc / <a href="https://github.com/GNOME/gjs/blob/master/doc/gjs-byte-array.txt" target="_blank">gjs-byte-array.txt</a></li>
-<li>GNOME / gjs / <a href="https://github.com/GNOME/gjs/blob/master/gjs/byteArray.cpp#L413" target="_blank">byteArray.cpp</a></li>
-</ul>
-<h2 id="big5-">Big5 讀檔範例</h2>
-<p><a href="../../example/gio/file-load-contents/big5.js">程式碼</a></p>
-<pre><code class="lang-javascript">#!<span class="hljs-regexp">/usr/</span>bin/gjs
-
-<span class="hljs-keyword">const</span> Gio = imports.gi.Gio;
-
-<span class="hljs-keyword">var</span> file = Gio.File.new_for_path(<span class="hljs-string">"big5.txt"</span>);
-
-<span class="hljs-keyword">try</span> {
-    <span class="hljs-keyword">var</span> [ok, data, etag] = file.load_contents(<span class="hljs-literal">null</span>);
-
-    <span class="hljs-keyword">if</span> (ok) {
-        print(data.toString(<span class="hljs-string">'big5'</span>));
-    }
-
-} <span class="hljs-keyword">catch</span> (e) {
-    print(<span class="hljs-string">"Error: "</span>, e.message);
-}
-</code></pre>
-<h2 id="">網頁範例</h2>
-<p><a href="../../example/gio/file-load-contents/uri.js">程式碼</a></p>
-<pre><code class="lang-javascript">#!<span class="hljs-regexp">/usr/</span>bin/gjs
-
-<span class="hljs-keyword">const</span> Gio = imports.gi.Gio;
-
-<span class="hljs-keyword">var</span> file = Gio.File.new_for_uri(<span class="hljs-string">"https://wiki.gnome.org/Projects/Gjs"</span>);
-
-<span class="hljs-keyword">try</span> {
-    <span class="hljs-keyword">var</span> [ok, data, etag] = file.load_contents(<span class="hljs-literal">null</span>);
-
-    <span class="hljs-keyword">if</span> (ok) {
-        print(data);
-    }
-
-} <span class="hljs-keyword">catch</span> (e) {
-    print(<span class="hljs-string">"Error: "</span>, e.message);
-}
-</code></pre>
+                        <h1 id="gtk">Gtk</h1>
 
                     
                     </section>
@@ -593,10 +517,10 @@
         </div>
 
         
-        <a href="../../content/gio/index.html" class="navigation navigation-prev " aria-label="Previous page: Gio"><i class="fa fa-angle-left"></i></a>
+        <a href="../../content/gio/file-load-contents.html" class="navigation navigation-prev " aria-label="Previous page: file load conetnts"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../../content/gtk/index.html" class="navigation navigation-next " aria-label="Next page: Gtk"><i class="fa fa-angle-right"></i></a>
+        <a href="../../content/gtk/start/index.html" class="navigation navigation-next " aria-label="Next page: 基本架構"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
