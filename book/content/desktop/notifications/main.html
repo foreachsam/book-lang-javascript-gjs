@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Basic Window | Gjs</title>
+        <title>notifications | Gjs</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -19,10 +19,8 @@
         
     
     
-    <link rel="next" href="../../../content/gtk/start/main-create.html" />
     
-    
-    <link rel="prev" href="../../../content/gtk/start/index.html" />
+    <link rel="prev" href="../../../content/desktop/index.html" />
     
 
         
@@ -34,7 +32,7 @@
 
 
         
-    <div class="book" data-level="5.1.1" data-basepath="../../.." data-revision="1436149111574">
+    <div class="book" data-level="6.1" data-basepath="../../.." data-revision="1436149111574">
     
 
 <div class="book-summary">
@@ -386,7 +384,7 @@
                 
     
         
-        <li class="chapter active" data-level="5.1.1" data-path="content/gtk/start/main.html">
+        <li class="chapter " data-level="5.1.1" data-path="content/gtk/start/main.html">
             
                 
                     <a href="../../../content/gtk/start/main.html">
@@ -573,7 +571,7 @@
                 
     
         
-        <li class="chapter " data-level="6.1" data-path="content/desktop/notifications/main.html">
+        <li class="chapter active" data-level="6.1" data-path="content/desktop/notifications/main.html">
             
                 
                     <a href="../../../content/desktop/notifications/main.html">
@@ -682,42 +680,32 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_20">
+                    <section class="normal" id="section-gitbook_3">
                     
-                        <h1 id="gtk-basic-window">Gtk Basic Window</h1>
-<h2 id="">主要範例</h2>
-<p><a href="../../../example/gtk/start/main.js">程式碼</a></p>
+                        <h1 id="desktop-notifications">desktop notifications</h1>
+<p><a href="../../../example/desktop/notifications/main.js">程式碼</a></p>
 <pre><code class="lang-javascript">#!<span class="hljs-regexp">/usr/</span>bin/gjs
 
-<span class="hljs-keyword">const</span> Gtk = imports.gi.Gtk;
+<span class="hljs-keyword">const</span> Notify = imports.gi.Notify;
 
-Gtk.init(<span class="hljs-literal">null</span>, <span class="hljs-literal">null</span>);
+Notify.init(<span class="hljs-string">'Hello world'</span>);
 
-<span class="hljs-keyword">var</span> win = <span class="hljs-keyword">new</span> Gtk.Window({
-    type: Gtk.WindowType.TOPLEVEL
+<span class="hljs-keyword">let</span> notify = <span class="hljs-keyword">new</span> Notify.Notification({
+    summary: <span class="hljs-string">'Hello world!'</span>,
+    body: <span class="hljs-string">'This is an example of notifications.'</span>,
+    <span class="hljs-string">'icon-name'</span>: <span class="hljs-string">'dialog-information'</span>
 });
-win.connect(<span class="hljs-string">'delete-event'</span>, Gtk.main_quit);
-win.show_all();
 
-Gtk.main();
+notify.show();
 </code></pre>
-<h2 id="api">API</h2>
+<h2 id="api">Api</h2>
 <ul>
-<li><a href="https://people.gnome.org/~gcampagna/docs/Gtk-3.0/index.html" target="_blank">Gtk-3.0</a> / <a href="https://people.gnome.org/~gcampagna/docs/Gtk-3.0/Gtk.Window.html" target="_blank">Gtk.Window</a></li>
-<li>Gtk-3.0 / <a href="https://people.gnome.org/~gcampagna/docs/Gtk-3.0/Gtk.WindowType.html" target="_blank">Gtk.WindowType</a></li>
-<li><a href="http://www.roojs.com/seed/gir-1.2-gtk-3.0/gjs/" target="_blank">RooJS</a> / <a href="http://www.roojs.com/seed/gir-1.2-gtk-3.0/gjs/Gtk.Window.html" target="_blank">Gtk.WindowType</a></li>
-</ul>
-<h2 id="windowtype">WindowType</h2>
-<ul>
-<li>Gtk.WindowType.TOPLEVEL</li>
-<li>Gtk.WindowType.POPUP</li>
+<li><a href="https://people.gnome.org/~gcampagna/docs/Notify-0.7/" target="_blank">Notify-0.7</a> / <a href="https://people.gnome.org/~gcampagna/docs/Notify-0.7/Notify.Notification.html" target="_blank">Notify.Notification</a></li>
+<li><a href="http://www.roojs.com/seed/gir-1.2-gtk-3.0/gjs/" target="_blank">RooJS</a> / <a href="http://www.roojs.com/seed/gir-1.2-gtk-3.0/gjs/Notify.html" target="_blank">Notify</a></li>
 </ul>
 <h2 id="">更多參考</h2>
 <ul>
-<li>Arch Wiki / GTK+/Development / 1 Write a simple message dialog app / <a href="https://wiki.archlinux.org/index.php/GTK%2B/Development#JavaScript" target="_blank">1.16 JavaScript</a></li>
-<li>Github / Gnome / gjs / examples / <a href="https://github.com/GNOME/gjs/blob/master/examples/gtk.js" target="_blank">gtk.js</a></li>
-<li><a href="https://developer.gnome.org/gnome-devel-demos/stable/index.html.en" target="_blank">GNOME Developer Platform Demos</a> / <a href="https://developer.gnome.org/gnome-devel-demos/stable/js.html.en" target="_blank">Tutorials, code samples and platform demos in JavaScript</a> / <a href="https://developer.gnome.org/gnome-devel-demos/stable/beginner.js.html.en" target="_blank">Tutorial for beginners and code samples</a> / <a href="https://developer.gnome.org/gnome-devel-demos/stable/window.js.html.en" target="_blank">Window</a></li>
-<li><a href="https://developer.gnome.org/platform-overview/" target="_blank">GNOME application development overview</a> / <a href="https://developer.gnome.org/platform-overview/stable/" target="_blank">stable</a> / <a href="https://developer.gnome.org/platform-overview/stable/tour.html.en" target="_blank">Get started</a></li>
+<li>Arch Wiki / <a href="https://wiki.archlinux.org/index.php/Desktop_notifications" target="_blank">Desktop_notifications</a></li>
 </ul>
 
                     
@@ -729,10 +717,8 @@ Gtk.main();
         </div>
 
         
-        <a href="../../../content/gtk/start/index.html" class="navigation navigation-prev " aria-label="Previous page: 基本架構"><i class="fa fa-angle-left"></i></a>
+        <a href="../../../content/desktop/index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Desktop"><i class="fa fa-angle-left"></i></a>
         
-        
-        <a href="../../../content/gtk/start/main-create.html" class="navigation navigation-next " aria-label="Next page: Basic Window Creation"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

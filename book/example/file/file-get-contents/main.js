@@ -26,3 +26,4 @@ try {
 //http://stackoverflow.com/questions/6983026/javascript-assign-array-values-to-multiple-variables
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/New_in_JavaScript/1.7#Destructuring_assignment_%28Merge_into_own_page.2Fsection%29
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+//https://wiki.gnome.org/Projects/Gjs/Mapping
