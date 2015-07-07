@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>exit | Gjs</title>
+        <title>basic | Gjs</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -19,10 +19,8 @@
         
     
     
-    <link rel="next" href="../../../content/i18n/index.html" />
     
-    
-    <link rel="prev" href="../../../content/system/index.html" />
+    <link rel="prev" href="../../../content/i18n/gettext/index.html" />
     
 
         
@@ -34,7 +32,7 @@
 
 
         
-    <div class="book" data-level="8.1" data-basepath="../../.." data-revision="1436284587800">
+    <div class="book" data-level="9.1.1" data-basepath="../../.." data-revision="1436284587800">
     
 
 <div class="book-summary">
@@ -627,7 +625,7 @@
                 
     
         
-        <li class="chapter active" data-level="8.1" data-path="content/system/exit/index.html">
+        <li class="chapter " data-level="8.1" data-path="content/system/exit/index.html">
             
                 
                     <a href="../../../content/system/exit/index.html">
@@ -682,7 +680,7 @@
                 
     
         
-        <li class="chapter " data-level="9.1.1" data-path="content/i18n/gettext/basic.html">
+        <li class="chapter active" data-level="9.1.1" data-path="content/i18n/gettext/basic.html">
             
                 
                     <a href="../../../content/i18n/gettext/basic.html">
@@ -796,45 +794,161 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_36">
+                    <section class="normal" id="section-gitbook_22">
                     
-                        <h1 id="system-exit">system exit</h1>
-<h2 id="">主要範例</h2>
-<p><a href="../../../example/system/exit/main.js">example/system/exit/main.js</a></p>
+                        <h1 id="gettext-">gettext 基本範例</h1>
+<h2 id="">測試環境</h2>
+<ul>
+<li>Ubuntu 14.04</li>
+</ul>
+<h2 id="">程式碼</h2>
+<p><a href="../../../example/i18n/gettext/basic/main.js">example/i18n/gettext/basic/main.js</a></p>
 <pre><code class="lang-javascript">#!<span class="hljs-regexp">/usr/</span>bin/gjs
 
-<span class="hljs-keyword">const</span> System = imports.system;
+<span class="hljs-keyword">const</span> GLib = imports.gi.GLib;
 
-<span class="hljs-keyword">if</span> (ARGV.length &gt; <span class="hljs-number">0</span>) {
-    System.exit(<span class="hljs-number">1</span>);
-}
+<span class="hljs-keyword">const</span> GetText = imports.gettext;
+<span class="hljs-keyword">const</span> _ = GetText.gettext;
 
-System.exit(<span class="hljs-number">0</span>);
+<span class="hljs-keyword">const</span> _Package = <span class="hljs-string">'vlc'</span>;
+
+GetText.bindtextdomain(_Package, <span class="hljs-string">'/usr/share/locale'</span>);
+GetText.textdomain(_Package);
+
+print(<span class="hljs-string">'===== locale ====='</span>);
+print(<span class="hljs-string">'LANG: \t\t\t'</span>, GLib.getenv(<span class="hljs-string">'LANG'</span>));
+print(<span class="hljs-string">'LANGUAGE: \t\t'</span>, GLib.getenv(<span class="hljs-string">'LANGUAGE'</span>));
+print(<span class="hljs-string">'LC_ALL: \t\t'</span>, GLib.getenv(<span class="hljs-string">'LC_ALL'</span>));
+print(<span class="hljs-string">'===== text ====='</span>);
+print(_(<span class="hljs-string">'File'</span>));
 </code></pre>
-<p><a href="../../../example/system/exit/test.sh">example/system/exit/test.sh</a></p>
-<pre><code class="lang-sh"><span class="hljs-shebang">#!/bin/sh</span>
+<p><a href="../../../example/i18n/gettext/basic/zh_TW.sh">example/i18n/gettext/basic/zh_TW.sh</a></p>
+<pre><code class="lang-sh"><span class="hljs-shebang">#!/bin/sh
+</span>
+<span class="hljs-keyword">export</span> LANG=zh_TW.UTF-<span class="hljs-number">8</span>
+<span class="hljs-keyword">export</span> LANGUAGE=zh_TW.UTF-<span class="hljs-number">8</span>
+<span class="hljs-keyword">export</span> LC_ALL=zh_TW.UTF-<span class="hljs-number">8</span>
 ./main.js
-<span class="hljs-built_in">echo</span> $?
 </code></pre>
-<p><a href="../../../example/system/exit/test_args.sh">example/system/exit/test_args.sh</a></p>
-<pre><code class="lang-sh"><span class="hljs-comment">#/bin/sh</span>
-./main.js some
-<span class="hljs-built_in">echo</span> $?
+<p><a href="../../../example/i18n/gettext/basic/zh_CN.sh">example/i18n/gettext/basic/zh_CN.sh</a></p>
+<pre><code class="lang-sh"><span class="hljs-shebang">#!/bin/sh
+</span>
+<span class="hljs-keyword">export</span> LANG=zh_CN.UTF-<span class="hljs-number">8</span>
+<span class="hljs-keyword">export</span> LANGUAGE=zh_CN.UTF-<span class="hljs-number">8</span>
+<span class="hljs-keyword">export</span> LC_ALL=zh_CN.UTF-<span class="hljs-number">8</span>
+./main.js
+</code></pre>
+<p><a href="../../../example/i18n/gettext/basic/en_US.sh">example/i18n/gettext/basic/en_US.sh</a></p>
+<pre><code class="lang-sh"><span class="hljs-shebang">#!/bin/sh
+</span>
+<span class="hljs-keyword">export</span> LANG=en_US.UTF-<span class="hljs-number">8</span>
+<span class="hljs-keyword">export</span> LANGUAGE=en_US.UTF-<span class="hljs-number">8</span>
+<span class="hljs-keyword">export</span> LC_ALL=en_US.UTF-<span class="hljs-number">8</span>
+./main.js
 </code></pre>
 <h2 id="">測試</h2>
+<h3 id="zh_tw">zh_TW</h3>
+<p>請確保「/usr/share/locale/zh_TW/LC_MESSAGES/vlc.mo」這個檔存在。</p>
+<p>請確保「locale -a | grep zh_TW.utf8 」會顯示「zh_TW.utf8」。</p>
+<p>然後執行</p>
+<pre><code>$ ./zh_TW.sh
+</code></pre><p>顯示</p>
+<pre><code>===== locale =====
+LANG:                    zh_TW.UTF-8
+LANGUAGE:                zh_TW.UTF-8
+LC_ALL:                  zh_TW.UTF-8
+===== text =====
+檔案
+</code></pre><p>請對照「Github / videolan / vlc / po / <a href="https://github.com/videolan/vlc/blob/master/po/zh_TW.po#L6605" target="_blank">zh_TW.po</a>」這裡的翻譯。</p>
+<p>會看到</p>
+<pre><code>msgid &quot;File&quot;
+msgstr &quot;檔案&quot;
+</code></pre><h3 id="zh_cn">zh_CN</h3>
+<p>請確保「/usr/share/locale/zh_CN/LC_MESSAGES/vlc.mo」這個檔存在。</p>
+<p>請確保「locale -a | grep zh_CN.utf8 」會顯示「zh_CN.utf8」。</p>
+<p>然後執行</p>
+<pre><code>$ ./zh_CN.sh
+</code></pre><p>顯示</p>
+<pre><code>===== locale =====
+LANG:                    zh_CN.UTF-8
+LANGUAGE:                zh_CN.UTF-8
+LC_ALL:                  zh_CN.UTF-8
+===== text =====
+文件
+</code></pre><p>請對照「Github / videolan / vlc / po / <a href="https://github.com/videolan/vlc/blob/master/po/zh_CN.po" target="_blank">zh_CN.po</a>」這裡的翻譯。</p>
+<p>會看到</p>
+<pre><code>msgid &quot;File&quot;
+msgstr &quot;文件&quot;
+</code></pre><h3 id="en_us">en_US</h3>
 <p>執行</p>
-<pre><code class="lang-sh">$ ./test.sh
-</code></pre>
-<p>會顯示</p>
-<pre><code>0
+<pre><code>$ ./en_US.sh
+</code></pre><p>顯示</p>
+<pre><code>===== locale =====
+LANG:                    en_US.UTF-8
+LANGUAGE:                en_US.UTF-8
+LC_ALL:                  en_US.UTF-8
+===== text =====
+File
+</code></pre><h2 id="">注意事項</h2>
+<h3 id="mo">mo檔是否存在</h3>
+<p>若是「/usr/share/locale/zh_TW/LC_MESSAGES/vlc.mo」
+或是「/usr/share/locale/zh_CN/LC_MESSAGES/vlc.mo」
+不存在。</p>
+<p>執行下面的指令安裝「<a href="http://packages.ubuntu.com/trusty/vlc-data" target="_blank">vlc-data</a>」這個套件</p>
+<pre><code>$ sudo apt-get install vlc-data
+</code></pre><p>若有安裝「<a href="http://packages.ubuntu.com/trusty/vlc-data" target="_blank">vlc-data</a>」這個套件</p>
+<p>執行</p>
+<pre><code>$ dpkg -S /usr/share/locale/zh_TW/LC_MESSAGES/vlc.mo
+</code></pre><p>顯示</p>
+<pre><code>vlc-data: /usr/share/locale/zh_TW/LC_MESSAGES/vlc.mo
 </code></pre><p>執行</p>
-<pre><code class="lang-sh">$ ./test_args.sh
-</code></pre>
-<p>會顯示</p>
-<pre><code>1
-</code></pre><h2 id="">更多參考</h2>
+<pre><code>$ dpkg -S /usr/share/locale/zh_CN/LC_MESSAGES/vlc.mo
+</code></pre><p>顯示</p>
+<pre><code>vlc-data: /usr/share/locale/zh_CN/LC_MESSAGES/vlc.mo
+</code></pre><h3 id="locale">locale是否支援</h3>
+<h4 id="zh_tw">zh_TW</h4>
+<p>執行「locale -a | grep zh_TW.utf8 」若是沒有顯示「zh_TW.utf8」。</p>
+<p>請執行</p>
+<pre><code>$ sudo locale-gen zh_TW.UTF-8
+</code></pre><p>再執行</p>
+<pre><code>locale -a | grep zh_TW.utf8
+</code></pre><p>就會顯示</p>
+<pre><code>zh_TW.utf8
+</code></pre><p>在「/var/lib/locales/supported.d/local」這個檔</p>
+<pre><code>$ cat /var/lib/locales/supported.d/local | grep zh_TW
+</code></pre><p>也會看到新加入一行</p>
+<pre><code>zh_TW.UTF-8 UTF-8
+</code></pre><p>所以上面的方式，也可以改成直接在「/var/lib/locales/supported.d/local」加入一行「zh_TW.UTF-8 UTF-8」</p>
+<p>然後執行</p>
+<pre><code>$ sudo locale-gen
+</code></pre><p>或是</p>
+<pre><code>$ sudo locale-gen --purge
+</code></pre><h4 id="zh_cn">zh_CN</h4>
+<p>執行「locale -a | grep zh_CN.utf8 」若是沒有顯示「zh_CN.utf8」。</p>
+<p>請執行</p>
+<pre><code>$ sudo locale-gen zh_CN.UTF-8
+</code></pre><p>其餘的參照上面「zh_TW」的作法</p>
+<h2 id="">更多參考</h2>
 <ul>
-<li>Github / Gnome / gjs / installed-tests / scripts / <a href="https://github.com/GNOME/gjs/blob/master/installed-tests/scripts/testSystemExit.js" target="_blank">testSystemExit.js</a></li>
+<li>Github / GNOME / gjs / examples / <a href="https://github.com/GNOME/gjs/blob/master/examples/gettext.js" target="_blank">gettext.js</a></li>
+<li>Github / GNOME / gjs / modules / <a href="https://github.com/magcius/gjs/blob/master/modules/gettext.js" target="_blank">gettext.js</a></li>
+<li>Wiki / <a href="https://zh.wikipedia.org/zh-tw/Gettext" target="_blank">gettext</a></li>
+<li>Tsung&#39;s Blog / <a href="http://blog.longwin.com.tw/2009/11/ubuntu-910-add-set-locale-gen-2009/" target="_blank">Ubuntu 9.10 增加 / 設定 語系(Locale)</a></li>
+<li>Tsung&#39;s Blog / <a href="http://blog.longwin.com.tw/2007/09/gettext_php_i18n_2007/" target="_blank">使用 gettext 來實做 PHP 多國語系支援(I18N)</a></li>
+<li>石頭閒語 / <a href="http://blog.roodo.com/rocksaying/archives/19453974.html" target="_blank">gjs - 中文字的處理</a></li>
+<li>石頭閒語 / <a href="http://blog.roodo.com/rocksaying/archives/15193601.html" target="_blank">PHP 網頁訊息國際化與 gettext 使用經驗</a></li>
+<li>石頭閒語 / <a href="http://blog.roodo.com/rocksaying/archives/15171511.html" target="_blank">Vala with GNU gettext</a></li>
+</ul>
+<h2 id="manual">Manual</h2>
+<ul>
+<li>man <a href="http://manpages.ubuntu.com/manpages/trusty/en/man1/locale.1.html" target="_blank">locale</a></li>
+<li>man <a href="http://manpages.ubuntu.com/manpages/trusty/en/man8/locale-gen.8.html" target="_blank">locale-gen</a></li>
+</ul>
+<h2 id="">相關檔案</h2>
+<ul>
+<li>/var/lib/locales/supported.d/local</li>
+<li>/usr/lib/locale/locale-archive</li>
+<li>/etc/default/locale</li>
 </ul>
 
                     
@@ -846,10 +960,8 @@ System.exit(<span class="hljs-number">0</span>);
         </div>
 
         
-        <a href="../../../content/system/index.html" class="navigation navigation-prev " aria-label="Previous page: System"><i class="fa fa-angle-left"></i></a>
+        <a href="../../../content/i18n/gettext/index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: gettext"><i class="fa fa-angle-left"></i></a>
         
-        
-        <a href="../../../content/i18n/index.html" class="navigation navigation-next " aria-label="Next page: I18N"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
