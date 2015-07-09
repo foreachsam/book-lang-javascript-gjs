@@ -8,7 +8,7 @@ const Win = new Lang.Class({
 	Extends: Gtk.Window,
 	_init: function(args) {
 		this.parent({
-			title: 'Example: Creation for Extend Gtk.Window',
+			title: 'Example: Inherit Gtk.Window',
 			default_width: 800,
 			default_height: 600,
 			type: Gtk.WindowType.TOPLEVEL
@@ -22,10 +22,7 @@ const Win = new Lang.Class({
 	}
 });
 
-Win.new = function() {
-	return new Win();
-}
-
 Gtk.init(null, null);
-Win.new().run();
+var win = new Win();
+win.run();
 Gtk.main();

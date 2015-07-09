@@ -6,17 +6,20 @@ const Gio = imports.gi.Gio;
 
 const Win = new Lang.Class({
 	Name: 'Win',
+	Extends: Gtk.Window,
 	_init: function(args) {
-		this.win = new Gtk.Window({
-			title: 'Example: App for Decorate Gtk.Window',
+		this.parent({
+			title: 'Example: App for Inherit Gtk.Window',
 			default_width: 800,
 			default_height: 600,
 			type: Gtk.WindowType.TOPLEVEL
 		});
+
 	},
 
 	run: function() {
-		this.win.show_all();
+		this.show_all();
+		return this;
 	}
 });
 
@@ -26,22 +29,21 @@ Win.new = function() {
 
 const App = new Lang.Class({
 	Name: 'App',
+	Extends: Gtk.Application,
 	_init: function(args) {
-		this.app = new Gtk.Application({
+		this.parent({
 			application_id: 'org.example.app',
 			flags: Gio.ApplicationFlags.FLAGS_NONE
 		});
 
-		this.app.connect('activate', Lang.bind(this, this._onActivate));
+		this.connect('activate', Lang.bind(this, this._onActivate));
+
 	},
+
 	_onActivate: function() {
 		var win = Win.new();
 		win.run();
-		this.app.add_window(win.win);
-	},
-
-	run: function(args) {
-		this.app.run(args);
+		this.add_window(win);
 	}
 });
 
@@ -50,4 +52,3 @@ App.new = function() {
 }
 
 App.new().run(ARGV);
-

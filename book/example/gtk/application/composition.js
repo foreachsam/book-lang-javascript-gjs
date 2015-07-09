@@ -6,20 +6,17 @@ const Gio = imports.gi.Gio;
 
 const Win = new Lang.Class({
 	Name: 'Win',
-	Extends: Gtk.Dialog,
 	_init: function(args) {
-		this.parent({
-			title: 'Example: Dialog for Extend Gtk.Window',
+		this.win = new Gtk.Window({
+			title: 'Example: App for Composite Gtk.Window',
 			default_width: 800,
 			default_height: 600,
 			type: Gtk.WindowType.TOPLEVEL
 		});
-
 	},
 
 	run: function() {
-		this.show_all();
-		return this;
+		this.win.show_all();
 	}
 });
 
@@ -29,21 +26,22 @@ Win.new = function() {
 
 const App = new Lang.Class({
 	Name: 'App',
-	Extends: Gtk.Application,
 	_init: function(args) {
-		this.parent({
+		this.app = new Gtk.Application({
 			application_id: 'org.example.app',
 			flags: Gio.ApplicationFlags.FLAGS_NONE
 		});
 
-		this.connect('activate', Lang.bind(this, this._onActivate));
-
+		this.app.connect('activate', Lang.bind(this, this._onActivate));
 	},
-
 	_onActivate: function() {
 		var win = Win.new();
 		win.run();
-		this.add_window(win);
+		this.app.add_window(win.win);
+	},
+
+	run: function(args) {
+		this.app.run(args);
 	}
 });
 
@@ -52,3 +50,4 @@ App.new = function() {
 }
 
 App.new().run(ARGV);
+

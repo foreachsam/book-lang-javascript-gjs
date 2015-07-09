@@ -7,7 +7,7 @@ const Win = new Lang.Class({
 	Name: 'Win',
 	_init: function(args) {
 		this.win = new Gtk.Window({
-			title: 'Example: Decorate Gtk.Window',
+			title: 'Example: Creation for Composite Gtk.Window',
 			default_width: 800,
 			default_height: 600,
 			type: Gtk.WindowType.TOPLEVEL
@@ -21,7 +21,10 @@ const Win = new Lang.Class({
 	}
 });
 
+Win.new = function() {
+	return new Win();
+}
+
 Gtk.init(null, null);
-var win = new Win();
-win.run();
+Win.new().run();
 Gtk.main();
