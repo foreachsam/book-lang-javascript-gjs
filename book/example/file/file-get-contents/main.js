@@ -1,4 +1,4 @@
-#!/usr/bin/gjs
+#!/usr/bin/env gjs
 
 const Lang = imports.lang;
 const GLib = imports.gi.GLib;
@@ -6,7 +6,7 @@ const GLib = imports.gi.GLib;
 try {
 	//var rs = GLib.file_get_contents("data.txt");
 	//print(rs[1]);
-	var [ok, content] = GLib.file_get_contents("data.txt");
+	let [ok, content] = GLib.file_get_contents("data.txt");
 	//let [ok, content] = GLib.file_get_contents("data.txt");
 	if (ok) {
 		print(content);

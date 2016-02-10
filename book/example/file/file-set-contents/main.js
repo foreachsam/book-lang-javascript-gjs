@@ -1,10 +1,10 @@
-#!/usr/bin/gjs
+#!/usr/bin/env gjs
 
 const Lang = imports.lang;
 const GLib = imports.gi.GLib;
 
 try {
-	var ok = GLib.file_set_contents("data.txt", "中文");
+	let ok = GLib.file_set_contents("data.txt", "中文");
 	//print(ok);
 } catch (e) {
 	print("Error: ", e.message);
